@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjectBySlug, clearSelectedProject } from '../store/projectSlice';
 import { openEnquiryModal } from '../store/enquirySlice';
 import { pageVariants, scrollReveal } from '../animations/pageTransitions';
-import ImageLightbox from '../components/ui/ImageLightbox';
+import ImageLightbox from '../Components/ui/ImageLightbox';
 import {
   Compass, MapPin, Building2, Calendar, FileText, ChevronDown, Video,
   CheckCircle, Landmark, ShieldCheck, Download, Award, Trees, Sparkles

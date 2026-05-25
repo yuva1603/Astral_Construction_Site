@@ -4,9 +4,9 @@ import { AnimatePresence } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
 
 // Layout
-import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
-import EnquiryModal from './components/layout/EnquiryModal';
+import Navbar from './Components/layout/Navbar';
+import Footer from './Components/layout/Footer';
+import EnquiryModal from './Components/layout/EnquiryModal';
 
 // Pages - Lazy load for performance optimization
 const Home = lazy(() => import('./pages/Home'));

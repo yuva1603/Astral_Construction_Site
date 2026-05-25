@@ -8,9 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects } from '../store/projectSlice';
 import { openEnquiryModal } from '../store/enquirySlice';
 import { pageVariants, scrollReveal, staggerContainer, staggerItem } from '../animations/pageTransitions';
-import GoldParticles from '../components/ui/GoldParticles';
-import AnimatedCounter from '../components/ui/AnimatedCounter';
-import ProjectCard from '../components/ui/ProjectCard';
+import GoldParticles from '../Components/ui/GoldParticles';
+import AnimatedCounter from '../Components/ui/AnimatedCounter';
+import ProjectCard from '../Components/ui/ProjectCard';
 
 // Swiper CSS imports (handled in Vite)
 import 'swiper/css';

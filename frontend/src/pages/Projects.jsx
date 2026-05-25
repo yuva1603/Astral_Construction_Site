@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProjects } from '../store/projectSlice';
 import { setCategory, setStatus } from '../store/filterSlice';
-import ProjectCard from '../components/ui/ProjectCard';
+import ProjectCard from '../Components/ui/ProjectCard';
 import { pageVariants, scrollReveal, staggerContainer } from '../animations/pageTransitions';
 import { Sparkles, Building2, MapPin } from 'lucide-react';
 
