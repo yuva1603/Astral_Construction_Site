@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #1a1a2e;        /* Deep navy — authority */
+  --color-secondary: #c9a84c;      /* Gold — luxury accent */
+  --color-accent: #e8d5a3;         /* Light gold — warmth */
+  --color-surface: #0f0f1a;        /* Dark background */
+  --color-surface-2: #16213e;      /* Card backgrounds */
+  --color-text: #f5f0e8;           /* Off-white text */
+  --color-text-muted: #a09880;     /* Muted text */
+  --color-border: rgba(201,168,76,0.2); /* Subtle gold borders */
+  
+  --font-display: 'Playfair Display', serif;
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-accent: 'Bebas Neue', sans-serif;
+  
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-ken-burns: kenburns 40s ease infinite alternate;
+  
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @keyframes kenburns {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.15) translate(-2%, -1%); }
+  }
+}
+
+/* Global Reset & Base */
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: #0f0f1a;
+  color: #f5f0e8;
+  overflow-x: hidden;
+}
+
+/* Premium noise overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 9999;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(22, 33, 62, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+}
+
+.glass-panel-hover {
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.glass-panel-hover:hover {
+  background: rgba(22, 33, 62, 0.6);
+  border-color: rgba(201, 168, 76, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+}
+
+/* Custom Scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0f0f1a;
+}
+::-webkit-scrollbar-thumb {
+  background: #c9a84c;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #e8d5a3;
+}
+
+/* Diagonal Clip Paths */
+.clip-diagonal-left {
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+}
+
+.clip-diagonal-right {
+  clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 90%);
+}
+
+/* Gold Button Styling */
+.btn-gold {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #0f0f1a;
+  background-color: #c9a84c;
+  border: 1px solid #c9a84c;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #e8d5a3;
+  z-index: -1;
+  transition: all 0.4s ease;
+}
+
+.btn-gold:hover::before {
+  width: 100%;
+}
+
+.btn-gold:hover {
+  color: #0f0f1a;
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
+}
+
+.btn-gold-outline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 2rem;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #c9a84c;
+  background-color: transparent;
+  border: 1px solid rgba(201, 168, 76, 0.4);
+  overflow: hidden;
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+
+.btn-gold-outline:hover {
+  color: #0f0f1a;
+  border-color: #c9a84c;
+  background-color: #c9a84c;
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+}
+
+/* Swiper slider customized controls */
+.swiper-pagination-bullet {
+  background: rgba(255, 255, 255, 0.5) !important;
+}
+.swiper-pagination-bullet-active {
+  background: #c9a84c !important;
+  width: 24px !important;
+  border-radius: 4px !important;
+  transition: width 0.3s ease;
+}
