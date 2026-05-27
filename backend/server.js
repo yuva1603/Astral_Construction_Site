@@ -55,6 +55,12 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', time: new Date() });
 });
 
+// Root path fallback health check (prevents 404s on cloud deploy health pings e.g. Render)
+app.get('/', (req, res) => {
+  res.json({ message: 'Voora Real Estate API Service is Active', status: 'ok' });
+});
+
+
 // Mount Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
