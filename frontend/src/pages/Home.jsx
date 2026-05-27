@@ -72,7 +72,7 @@ export const Home = () => {
         interest: data.projectType,
         message: data.message
       })).unwrap();
-      
+
       toast.success('Your consultation enquiry has been sent successfully!');
       reset();
     } catch (err) {
@@ -207,7 +207,7 @@ export const Home = () => {
   ];
 
   // Merge loaded projects from backend with fallback lists if backend database is empty
-  const activeUpcoming = projects.filter(p => p.status === 'upcoming' || p.status === 'ongoing').length > 0 
+  const activeUpcoming = projects.filter(p => p.status === 'upcoming' || p.status === 'ongoing').length > 0
     ? projects.filter(p => p.status === 'upcoming' || p.status === 'ongoing')
     : fallbackUpcoming;
 
@@ -273,13 +273,13 @@ export const Home = () => {
       {/* SECTION 1: HERO CINEMATIC SECTION (WITH DYNAMIC VOORA TEXT ROTATION) */}
       <section className="relative min-h-[90vh] lg:min-h-[95vh] flex items-center pt-0 pb-16 overflow-hidden bg-gradient-to-br from-surface via-surface to-accent/15">
         <div className="noise-overlay" />
-        
+
         {/* Subtle decorative purple glowing shapes */}
         <div className="absolute top-[20%] right-[-10%] w-[45%] h-[45%] rounded-full bg-primary/8 blur-[120px] pointer-events-none select-none" />
         <div className="absolute bottom-[10%] left-[-10%] w-[35%] h-[35%] rounded-full bg-secondary/6 blur-[100px] pointer-events-none select-none" />
 
         <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center pt-2">
-          
+
           {/* Left Column Content - Dynamic Project Details */}
           <div className="lg:col-span-6 flex flex-col items-start text-left min-h-[380px] justify-center">
             <span className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/15 text-primary text-xs font-extrabold uppercase tracking-widest mb-6">
@@ -328,9 +328,8 @@ export const Home = () => {
                 <button
                   key={i}
                   onClick={() => setHeroSlideIdx(i)}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    heroSlideIdx === i ? 'w-8 bg-primary' : 'w-2 bg-primary/20 hover:bg-primary/40'
-                  }`}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${heroSlideIdx === i ? 'w-8 bg-primary' : 'w-2 bg-primary/20 hover:bg-primary/40'
+                    }`}
                 />
               ))}
             </div>
@@ -338,7 +337,7 @@ export const Home = () => {
 
           {/* Right Column Visual Graphic */}
           <div className="lg:col-span-6 relative flex items-center justify-center lg:justify-end">
-            
+
             {/* Voora brand legacy counter glass box */}
             <div className="absolute left-[-20px] md:left-[30px] lg:left-[-40px] bottom-[30px] z-20 glass-panel p-5.5 rounded-3xl border border-white/40 shadow-2xl flex flex-col gap-4 max-w-[190px]">
               <div className="flex items-center gap-3 border-b border-border/50 pb-3">
@@ -389,7 +388,7 @@ export const Home = () => {
                 <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-transparent pointer-events-none" />
               </div>
             </div>
-            
+
           </div>
         </div>
       </section>
@@ -426,11 +425,11 @@ export const Home = () => {
       <section className="py-20 relative overflow-hidden bg-white/30">
         <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
+
             {/* Left Content Column */}
             <div className="lg:col-span-6 flex flex-col items-start">
               <span className="text-primary font-extrabold uppercase tracking-widest text-[11px] bg-primary/10 border border-primary/10 px-4.5 py-1.5 rounded-full mb-4">Our Roots</span>
-              
+
               <h2 className="font-display text-3.5xl lg:text-4.5xl font-black text-primary leading-tight mb-5">
                 Building Trust,<br />Crafting Landmarks
               </h2>
@@ -438,7 +437,7 @@ export const Home = () => {
               <p className="text-text-muted text-sm leading-relaxed mb-6 max-w-lg">
                 Welcome to Voora — a leading Chennai-based real estate conglomerate with a legacy spanning over three decades. Renowned for creating architectural landmarks, Voora has left an indelible signature on Chennai's rising skyline.
               </p>
-              
+
               <p className="text-text-muted text-sm leading-relaxed mb-8 max-w-lg">
                 Founded by the visionary developer Shri Voora Lakshminarasimha Rao, our brand is helmed today by sons Pavan Voora and Suman Voora, continuing a legacy of absolute precision and transparent business code.
               </p>
@@ -453,7 +452,7 @@ export const Home = () => {
 
             {/* Right Visual Stack Column - Story graphics */}
             <div className="lg:col-span-6 relative flex items-center justify-center lg:justify-end">
-              
+
               {/* Floating translucent glass card */}
               <div className="absolute left-[10px] sm:left-[30px] top-[40px] z-20 bg-white/70 backdrop-blur-xl border border-white/50 p-4.5 rounded-2xl shadow-xl flex flex-col items-center">
                 <span className="font-display text-3xl font-black text-primary">30+</span>
@@ -479,7 +478,7 @@ export const Home = () => {
 
       {/* SECTION 4: "Our Services" (VOORA SEGMENTS) */}
       <section id="services" className="py-24 relative overflow-hidden">
-        
+
         {/* Subtle vector line-art background effect */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none select-none flex items-center justify-center">
           <div className="w-[600px] h-[600px] rounded-full border border-primary animate-pulse" />
@@ -487,17 +486,17 @@ export const Home = () => {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
-          
+
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
+
             {/* Left Header Description */}
             <div className="lg:col-span-4 flex flex-col items-start">
               <span className="text-primary font-extrabold uppercase tracking-widest text-[11px] bg-primary/10 border border-primary/10 px-4.5 py-1.5 rounded-full mb-4">Our Core Segments</span>
-              
+
               <h2 className="font-display text-3.5xl lg:text-4.5xl font-black text-primary leading-tight mb-5">
                 Our Segments
               </h2>
-              
+
               <p className="text-text-muted text-sm leading-relaxed mb-6">
                 From ultra-luxury oceanfront towers along the scenic ECR to strategic industrial plotting setups in airport corridors.
               </p>
@@ -512,7 +511,7 @@ export const Home = () => {
 
             {/* Right Service Grid (4 segments) */}
             <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-6">
-              
+
               <div className="glass-panel p-6 rounded-3xl border border-border/80 hover:border-primary/30 transition-all duration-300 flex flex-col items-start shadow-sm hover:shadow-md hover:translate-y-[-2px]">
                 <div className="w-10 h-10 rounded-2xl bg-primary/10 text-primary flex items-center justify-center mb-4">
                   <Compass size={20} />
@@ -591,7 +590,7 @@ export const Home = () => {
       {/* SECTION 5: "Iconic Upcoming Projects" (VOORA ACTIVE SLIDER) */}
       <section className="py-20 relative overflow-hidden bg-white/20">
         <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-          
+
           {/* Section Header */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10">
             <div>
@@ -614,11 +613,10 @@ export const Home = () => {
               <button
                 key={f}
                 onClick={() => setUpcomingFilter(f)}
-                className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
-                  upcomingFilter === f
+                className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${upcomingFilter === f
                     ? 'bg-primary text-white shadow-lg'
                     : 'bg-white text-text-muted border border-border/80 hover:border-primary/20'
-                }`}
+                  }`}
               >
                 {f === 'all' ? 'All Projects' : f === 'plot' ? 'Gated Plots' : f}
               </button>
@@ -638,7 +636,7 @@ export const Home = () => {
       {/* SECTION 6: "Completed Projects" (VOORA ASYMMETRIC GRID) */}
       <section className="py-24 relative overflow-hidden bg-white/40">
         <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
-          
+
           {/* Section Header */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10">
             <div>
@@ -661,11 +659,10 @@ export const Home = () => {
               <button
                 key={f}
                 onClick={() => setCompletedFilter(f)}
-                className={`px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${
-                  completedFilter === f
+                className={`px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer ${completedFilter === f
                     ? 'bg-primary text-white shadow-lg'
                     : 'bg-white text-text-muted border border-border/80 hover:border-primary/20'
-                }`}
+                  }`}
               >
                 {f === 'all' ? 'All Milestones' : f === 'plot' ? 'Gated Plots' : f}
               </button>
@@ -680,7 +677,7 @@ export const Home = () => {
             </div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-              
+
               {/* Large Featured Card (Left side, takes 5 cols) */}
               <div className="lg:col-span-5 flex">
                 {filteredCompleted[0] && (
@@ -703,7 +700,7 @@ export const Home = () => {
                       <span className="text-[10px] font-extrabold uppercase tracking-widest text-accent mb-2 block">Featured Landmark</span>
                       <h3 className="font-display text-2.5xl sm:text-3.5xl font-black mb-3">{filteredCompleted[0].name}</h3>
                       <p className="text-white/70 text-xs sm:text-sm max-w-sm mb-5 leading-relaxed">{filteredCompleted[0].location}</p>
-                      
+
                       <Link
                         to={`/project/${filteredCompleted[0].slug}`}
                         className="btn-gold text-[10px] font-bold py-2.5 px-6 shrink-0 shadow-lg"
@@ -762,7 +759,7 @@ export const Home = () => {
       <section className="py-24 relative overflow-hidden bg-white/30 border-t border-b border-border/80">
         <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
+
             <div className="lg:col-span-5">
               <span className="text-primary font-extrabold uppercase tracking-widest text-[11px] bg-primary/10 border border-primary/10 px-4.5 py-1.5 rounded-full mb-4 inline-block">Quality Standards</span>
               <h2 className="font-display text-3.5xl font-black text-primary mb-6 leading-tight">Pioneering Gated Safeguards</h2>
@@ -805,7 +802,7 @@ export const Home = () => {
             <span>📰 DT Next Editorial Spotlight</span>
             <span>★ TOI Chennai Infrastructure Updates</span>
             <span>📰 Chennai Real Property Digest</span>
-            
+
             <span>📰 Featured in The Hindu</span>
             <span>★ NDTV Real Estate Awards</span>
             <span>📰 DT Next Editorial Spotlight</span>
@@ -818,7 +815,7 @@ export const Home = () => {
       {/* SECTION 9: "What Our Clients Say" (GENUINE TESTIMONIALS SLIDER) */}
       <section className="py-24 relative overflow-hidden bg-white/20">
         <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
-          
+
           <div className="text-center max-w-xl mx-auto mb-16">
             <span className="text-primary font-extrabold uppercase tracking-widest text-[11px] bg-primary/10 border border-primary/10 px-4.5 py-1.5 rounded-full mb-3 inline-block">5,000+ Happy Families</span>
             <h2 className="font-display text-3.5xl font-black text-primary uppercase tracking-tight">What Our Clients Say</h2>
@@ -867,29 +864,29 @@ export const Home = () => {
 
       {/* SECTION 10: "Find Your Dream Horizon in Chennai" (ENQUIRY FORM) */}
       <section className="py-24 relative overflow-hidden bg-white/30">
-        
+
         {/* Subtle decorative purple glowing shapes */}
         <div className="absolute bottom-[20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px] pointer-events-none select-none" />
         <div className="absolute top-[10%] left-[-10%] w-[35%] h-[35%] rounded-full bg-secondary/5 blur-[100px] pointer-events-none select-none" />
 
         <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 relative z-10">
           <div className="glass-panel rounded-[3.5rem] bg-white/60 border border-white/50 shadow-2xl p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
+
             {/* Left Side Form Column */}
             <div className="lg:col-span-7 flex flex-col items-start">
               <span className="text-primary font-extrabold uppercase tracking-widest text-[11px] bg-primary/10 border border-primary/10 px-4.5 py-1.5 rounded-full mb-4">Privilege Lounge</span>
-              
+
               <h2 className="font-display text-3xl sm:text-4xl font-black text-primary leading-tight mb-2 uppercase tracking-tight">
                 Find Your Dream Horizon
               </h2>
-              
+
               <p className="text-text-muted text-xs sm:text-sm leading-relaxed mb-8 max-w-xl uppercase tracking-wider font-semibold">
                 From oceanfront towers along the ECR to plotted developments in airport corridor Kanchipuram — Voora builds for every ambition.
               </p>
 
               {/* Inquiry form */}
               <form onSubmit={handleSubmit(onSubmit)} className="w-full grid grid-cols-1 sm:grid-cols-2 gap-5">
-                
+
                 {/* Name */}
                 <div className="flex flex-col">
                   <div className="relative flex items-center">
