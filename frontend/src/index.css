@@ -1,19 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #1a1a2e;        /* Deep navy — authority */
-  --color-secondary: #c9a84c;      /* Gold — luxury accent */
-  --color-accent: #e8d5a3;         /* Light gold — warmth */
-  --color-surface: #0f0f1a;        /* Dark background */
-  --color-surface-2: #16213e;      /* Card backgrounds */
-  --color-text: #f5f0e8;           /* Off-white text */
-  --color-text-muted: #a09880;     /* Muted text */
-  --color-border: rgba(201,168,76,0.2); /* Subtle gold borders */
+  --color-primary: #3b22a1;        /* Luxurious Royal Midnight Indigo */
+  --color-secondary: #6346e5;      /* Vibrant Royal Indigo-Violet */
+  --color-accent: #a38bf5;         /* Premium Royal Soft Lavender */
+  --color-surface: #f6f4fc;        /* Crisp Royal Light Lavender Backdrop */
+  --color-surface-2: rgba(255, 255, 255, 0.78); /* High-end translucent white glass */
+  --color-text: #12093c;           /* Deepest Royal Midnight Navy - highly prestigious */
+  --color-text-muted: #5e5296;     /* Muted Royal Lavender-Slate */
+  --color-border: rgba(99, 70, 229, 0.14); /* Subtle royal purple borders */
   
-  --font-display: 'Playfair Display', serif;
-  --font-heading: 'Cormorant Garamond', serif;
-  --font-body: 'DM Sans', sans-serif;
-  --font-accent: 'Bebas Neue', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-accent: 'Outfit', sans-serif;
   
   --animate-marquee: marquee 30s linear infinite;
   --animate-ken-burns: kenburns 40s ease infinite alternate;
@@ -30,10 +31,27 @@
 
 /* Global Reset & Base */
 body {
-  font-family: 'DM Sans', sans-serif;
-  background-color: #0f0f1a;
-  color: #f5f0e8;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #f6f4fc;
+  color: #12093c;
   overflow-x: hidden;
+}
+
+/* Global Form Input Overrides for high legibility */
+input::placeholder, textarea::placeholder, select::placeholder {
+  color: rgba(94, 82, 150, 0.55) !important; /* Legible dark lavender placeholder */
+}
+
+select:invalid {
+  color: rgba(94, 82, 150, 0.55) !important; /* Muted select placeholder option color */
+}
+
+select option {
+  color: #12093c !important; /* Ensure dropdown select options lists are always dark navy */
+}
+
+input, textarea, select {
+  color: #12093c !important; /* Ensure input text is always high contrast dark navy */
 }
 
 /* Premium noise overlay */
@@ -44,7 +62,7 @@ body {
   width: 100%;
   height: 100%;
   content: "";
-  opacity: 0.02;
+  opacity: 0.015;
   pointer-events: none;
   z-index: 9999;
   background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
@@ -52,35 +70,37 @@ body {
 
 /* Glassmorphism Styles */
 .glass-panel {
-  background: rgba(22, 33, 62, 0.4);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(201, 168, 76, 0.15);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(99, 70, 229, 0.14);
+  box-shadow: 0 10px 30px rgba(99, 70, 229, 0.03);
 }
 
 .glass-panel-hover {
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .glass-panel-hover:hover {
-  background: rgba(22, 33, 62, 0.6);
-  border-color: rgba(201, 168, 76, 0.4);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(99, 70, 229, 0.28);
+  box-shadow: 0 20px 45px rgba(99, 70, 229, 0.08);
   transform: translateY(-4px);
 }
 
 /* Custom Scrollbar for premium feel */
 ::-webkit-scrollbar {
   width: 8px;
+  height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0f0f1a;
+  background: #f6f4fc;
 }
 ::-webkit-scrollbar-thumb {
-  background: #c9a84c;
+  background: #3b22a1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #e8d5a3;
+  background: #6346e5;
 }
 
 /* Diagonal Clip Paths */
@@ -92,23 +112,24 @@ body {
   clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 90%);
 }
 
-/* Gold Button Styling */
+/* Elegant Button Styling */
 .btn-gold {
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 2rem;
-  font-family: 'DM Sans', sans-serif;
+  padding: 0.75rem 2.25rem;
+  font-family: 'Outfit', sans-serif;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 0.825rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #0f0f1a;
-  background-color: #c9a84c;
-  border: 1px solid #c9a84c;
+  color: #ffffff;
+  background: linear-gradient(135deg, #3b22a1 0%, #6346e5 100%);
+  border: 1px solid #3b22a1;
+  border-radius: 9999px; /* Rounded pill shape */
   overflow: hidden;
-  transition: all 0.4s ease;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 1;
 }
 
@@ -119,7 +140,7 @@ body {
   left: 0;
   width: 0;
   height: 100%;
-  background-color: #e8d5a3;
+  background: linear-gradient(135deg, #6346e5 0%, #3b22a1 100%);
   z-index: -1;
   transition: all 0.4s ease;
 }
@@ -129,8 +150,9 @@ body {
 }
 
 .btn-gold:hover {
-  color: #0f0f1a;
-  box-shadow: 0 0 20px rgba(201, 168, 76, 0.4);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(99, 70, 229, 0.35);
 }
 
 .btn-gold-outline {
@@ -138,34 +160,81 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 2rem;
-  font-family: 'DM Sans', sans-serif;
+  padding: 0.75rem 2.25rem;
+  font-family: 'Outfit', sans-serif;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 0.825rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #c9a84c;
-  background-color: transparent;
-  border: 1px solid rgba(201, 168, 76, 0.4);
+  color: #3b22a1;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(99, 70, 229, 0.25);
+  border-radius: 9999px; /* Rounded pill shape */
   overflow: hidden;
-  transition: all 0.4s ease;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 1;
 }
 
 .btn-gold-outline:hover {
-  color: #0f0f1a;
-  border-color: #c9a84c;
-  background-color: #c9a84c;
-  box-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+  color: #ffffff;
+  border-color: #3b22a1;
+  background: linear-gradient(135deg, #3b22a1 0%, #6346e5 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(99, 70, 229, 0.25);
 }
 
 /* Swiper slider customized controls */
 .swiper-pagination-bullet {
-  background: rgba(255, 255, 255, 0.5) !important;
+  background: rgba(99, 70, 229, 0.3) !important;
+  opacity: 1 !important;
 }
 .swiper-pagination-bullet-active {
-  background: #c9a84c !important;
+  background: linear-gradient(135deg, #3b22a1 0%, #6346e5 100%) !important;
   width: 24px !important;
   border-radius: 4px !important;
   transition: width 0.3s ease;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  color: #3b22a1 !important;
+}
+
+/* Smooth scrolling via Lenis */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Custom scrollbar for scrollable containers (e.g. Enquiry Modal fields) */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgba(99, 70, 229, 0.25);
+  border-radius: 9999px;
+  transition: background 0.3s ease;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 70, 229, 0.45);
 }

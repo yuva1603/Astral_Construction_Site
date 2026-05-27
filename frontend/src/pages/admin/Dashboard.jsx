@@ -4,8 +4,8 @@ import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import {
-  ShieldAlert, Lock, Users, Briefcase, Mail, Phone,
-  FileCheck, LayoutGrid, CheckSquare, Trash2, Edit3, Plus, LogOut, CheckCircle2, AlertCircle
+  ShieldAlert, Lock, Users, Mail, Phone,
+  Trash2, Plus, LogOut, CheckCircle2, AlertCircle, Building2, CheckSquare, Sparkles, KeyRound
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -148,61 +148,73 @@ export const Dashboard = () => {
     return Object.entries(counts).map(([name, value]) => ({ name: name.toUpperCase(), value }));
   };
 
-  const COLORS = ['#c9a84c', '#4b23b5', '#10b981'];
+  const COLORS = ['#3b22a1', '#6346e5', '#10b981'];
 
   // Render Login Screen
   if (!token) {
     return (
-      <div className="min-h-[80vh] flex items-center justify-center p-4">
+      <div className="min-h-[85vh] flex items-center justify-center p-4 bg-surface relative overflow-hidden">
         <Helmet>
           <title>Admin Privilege Suite | Voora Real Estate</title>
         </Helmet>
         
-        <div className="w-full max-w-md glass-panel p-8 rounded-sm bg-surface-2 shadow-2xl border border-border/10">
-          <div className="text-center mb-8 border-b border-border/10 pb-4">
-            <Lock size={32} className="text-secondary mx-auto mb-3" />
-            <h2 className="font-heading text-3xl text-white">Privilege Secure Login</h2>
-            <p className="text-text-muted text-[10px] uppercase tracking-widest mt-1">Authorized access console</p>
+        {/* Decorative glowing blobs */}
+        <div className="absolute top-[20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px] pointer-events-none select-none" />
+        <div className="absolute bottom-[10%] left-[-10%] w-[35%] h-[35%] rounded-full bg-secondary/5 blur-[100px] pointer-events-none select-none" />
+
+        <div className="w-full max-w-md glass-panel p-8 rounded-[2.5rem] bg-white/70 shadow-2xl border border-white/50 relative z-10">
+          <div className="text-center mb-8 border-b border-border/10 pb-5">
+            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto mb-3 shadow-inner">
+              <Lock size={22} className="animate-pulse" />
+            </div>
+            <h2 className="font-display text-3xl font-black text-primary uppercase tracking-tight">Privilege Secure Suite</h2>
+            <p className="text-text-muted text-[9px] uppercase tracking-widest mt-1.5 font-bold">Authorized Admin Console</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-5">
             <div>
-              <label className="block text-[10px] font-semibold text-text-muted uppercase tracking-widest mb-1.5">
+              <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">
                 Username Credentials
               </label>
-              <input
-                type="text"
-                placeholder="voora_admin"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="w-full bg-surface/60 border border-border/20 text-white rounded-sm px-4 py-2.5 focus:border-secondary focus:outline-none transition-colors text-xs"
-              />
+              <div className="relative flex items-center">
+                <Users className="absolute left-4 text-primary/40" size={14} />
+                <input
+                  type="text"
+                  placeholder="voora_admin"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className="w-full bg-white/50 border border-border/80 text-primary rounded-full pl-11 pr-5 py-3 focus:border-primary focus:bg-white/80 focus:outline-none transition-all text-xs font-semibold"
+                />
+              </div>
             </div>
 
             <div>
-              <label className="block text-[10px] font-semibold text-text-muted uppercase tracking-widest mb-1.5">
+              <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">
                 Private Key Password
               </label>
-              <input
-                type="password"
-                placeholder="••••••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-surface/60 border border-border/20 text-white rounded-sm px-4 py-2.5 focus:border-secondary focus:outline-none transition-colors text-xs"
-              />
+              <div className="relative flex items-center">
+                <KeyRound className="absolute left-4 text-primary/40" size={14} />
+                <input
+                  type="password"
+                  placeholder="••••••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full bg-white/50 border border-border/80 text-primary rounded-full pl-11 pr-5 py-3 focus:border-primary focus:bg-white/80 focus:outline-none transition-all text-xs font-semibold"
+                />
+              </div>
             </div>
 
             <button
               type="submit"
               disabled={isLoggingIn}
-              className="w-full btn-gold h-11 flex items-center justify-center gap-2 cursor-pointer font-bold tracking-widest text-xs uppercase"
+              className="w-full btn-gold h-12 flex items-center justify-center gap-2 cursor-pointer font-bold tracking-widest text-xs uppercase shadow-lg mt-2"
             >
               {isLoggingIn ? 'Decrypting Access Key...' : 'Unlock Administrative Console'}
             </button>
           </form>
 
-          <div className="flex items-center justify-center gap-1.5 text-[9px] text-text-muted mt-6">
-            <ShieldAlert size={12} className="text-secondary" />
+          <div className="flex items-center justify-center gap-1.5 text-[9px] text-text-muted mt-6 font-bold uppercase tracking-wider">
+            <ShieldAlert size={12} className="text-primary shrink-0 animate-pulse" />
             <span>Encrypted tunnel active. Failed logins logged.</span>
           </div>
         </div>
@@ -211,53 +223,67 @@ export const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen py-10 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="min-h-screen py-10 px-4 md:px-6 lg:px-8 max-w-7xl mx-auto bg-surface relative overflow-x-hidden">
       <Helmet>
         <title>Privilege Control Dashboard | Voora Real Estate</title>
       </Helmet>
 
+      {/* Decorative glowing blobs */}
+      <div className="absolute top-[10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px] pointer-events-none select-none" />
+      <div className="absolute bottom-[20%] left-[-10%] w-[35%] h-[35%] rounded-full bg-secondary/5 blur-[100px] pointer-events-none select-none" />
+
       {/* HEADER SECTION */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-border/10 pb-6 mb-8 gap-4">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between border-b border-border/10 pb-6 mb-8 gap-4 relative z-10">
         <div>
-          <span className="text-secondary font-accent uppercase tracking-widest text-xs">Secure Console</span>
-          <h1 className="font-heading text-4xl text-white mt-1">Privilege Suite Dashboard</h1>
+          <span className="inline-flex items-center gap-1.5 px-4.5 py-1.5 rounded-full bg-primary/10 border border-primary/15 text-primary text-[10px] font-extrabold uppercase tracking-widest">
+            Secure Console
+          </span>
+          <h1 className="font-display text-4xl font-black text-primary uppercase tracking-tight mt-3">Privilege Suite Dashboard</h1>
         </div>
 
         <button
           onClick={handleLogout}
-          className="px-4 py-2 bg-red-500/10 border border-red-500/30 hover:bg-red-500 text-red-200 hover:text-white rounded-sm flex items-center gap-2 text-xs font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer"
+          className="px-5 py-2.5 bg-red-500/10 border border-red-500/20 hover:bg-red-500 text-red-600 hover:text-white rounded-full flex items-center gap-2 text-xs font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md"
         >
-          <LogOut size={14} />
+          <LogOut size={13} />
           <span>Exit Suite</span>
         </button>
       </div>
 
       {/* DASHBOARD SUMMARY CARDS BAR */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-        <div className="p-5 bg-surface-2 border border-border/10 rounded-sm">
-          <Users size={20} className="text-secondary mb-2" />
-          <p className="text-2xl font-bold text-white">{enquiries.length}</p>
-          <p className="text-[9px] text-text-muted uppercase tracking-widest font-bold">Total Enquiries</p>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-10 relative z-10">
+        <div className="p-6 bg-white/70 border border-white/50 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-2px]">
+          <div className="w-9 h-9 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0 mb-3 border border-primary/15">
+            <Users size={16} />
+          </div>
+          <p className="font-display text-3xl font-black text-primary leading-none">{enquiries.length}</p>
+          <p className="text-[9px] text-text-muted uppercase tracking-widest font-extrabold mt-1">Total Enquiries</p>
         </div>
-        <div className="p-5 bg-surface-2 border border-border/10 rounded-sm">
-          <CheckSquare size={20} className="text-blue-400 mb-2" />
-          <p className="text-2xl font-bold text-white">{enquiries.filter(e => e.status === 'new').length}</p>
-          <p className="text-[9px] text-text-muted uppercase tracking-widest font-bold">New Leads</p>
+        <div className="p-6 bg-white/70 border border-white/50 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-2px]">
+          <div className="w-9 h-9 rounded-2xl bg-blue-500/10 text-blue-600 flex items-center justify-center shrink-0 mb-3 border border-blue-500/15">
+            <CheckSquare size={16} />
+          </div>
+          <p className="font-display text-3xl font-black text-blue-600 leading-none">{enquiries.filter(e => e.status === 'new').length}</p>
+          <p className="text-[9px] text-text-muted uppercase tracking-widest font-extrabold mt-1">New Leads</p>
         </div>
-        <div className="p-5 bg-surface-2 border border-border/10 rounded-sm">
-          <AlertCircle size={20} className="text-amber-400 mb-2" />
-          <p className="text-2xl font-bold text-white">{enquiries.filter(e => e.status === 'contacted').length}</p>
-          <p className="text-[9px] text-text-muted uppercase tracking-widest font-bold">Contacted Leads</p>
+        <div className="p-6 bg-white/70 border border-white/50 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-2px]">
+          <div className="w-9 h-9 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center shrink-0 mb-3 border border-amber-500/15">
+            <AlertCircle size={16} />
+          </div>
+          <p className="font-display text-3xl font-black text-amber-600 leading-none">{enquiries.filter(e => e.status === 'contacted').length}</p>
+          <p className="text-[9px] text-text-muted uppercase tracking-widest font-extrabold mt-1">Contacted Leads</p>
         </div>
-        <div className="p-5 bg-surface-2 border border-border/10 rounded-sm">
-          <CheckCircle2 size={20} className="text-emerald-400 mb-2" />
-          <p className="text-2xl font-bold text-white">{enquiries.filter(e => e.status === 'converted').length}</p>
-          <p className="text-[9px] text-text-muted uppercase tracking-widest font-bold">Converted Sales</p>
+        <div className="p-6 bg-white/70 border border-white/50 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-2px]">
+          <div className="w-9 h-9 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0 mb-3 border border-emerald-500/15">
+            <CheckCircle2 size={16} />
+          </div>
+          <p className="font-display text-3xl font-black text-emerald-600 leading-none">{enquiries.filter(e => e.status === 'converted').length}</p>
+          <p className="text-[9px] text-text-muted uppercase tracking-widest font-extrabold mt-1">Converted Sales</p>
         </div>
       </div>
 
       {/* TAB TOGGLES */}
-      <div className="flex gap-4 border-b border-border/10 pb-4 mb-8">
+      <div className="flex gap-4 border-b border-border/10 pb-4 mb-8 relative z-10 select-none">
         {[
           { id: 'enquiries', name: 'Leads Inbox' },
           { id: 'projects', name: 'Landmark Inventory' },
@@ -266,10 +292,10 @@ export const Dashboard = () => {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-sm transition-colors duration-300 cursor-pointer ${
+            className={`px-5 py-2 text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-300 cursor-pointer ${
               activeTab === tab.id
-                ? 'bg-secondary text-surface'
-                : 'bg-surface-2 text-text-muted hover:text-white border border-border/10'
+                ? 'bg-gradient-to-r from-primary to-secondary text-white shadow-md shadow-primary/25'
+                : 'bg-white/60 text-text-muted border border-border/15 hover:border-primary/25 hover:text-primary hover:bg-white/95'
             }`}
           >
             {tab.name}
@@ -277,74 +303,74 @@ export const Dashboard = () => {
         ))}
       </div>
 
-      {/* TAB 1: ENQUIRIES TABLE TABLE */}
+      {/* TAB 1: ENQUIRIES TABLE */}
       {activeTab === 'enquiries' && (
-        <div className="glass-panel overflow-hidden border border-border/10 rounded-sm bg-surface-2">
+        <div className="glass-panel overflow-hidden border border-white/50 rounded-[2rem] bg-white/70 shadow-sm relative z-10">
           {loadingData ? (
-            <div className="text-center py-16 text-text-muted animate-pulse">Syncing leads...</div>
+            <div className="text-center py-16 text-text-muted font-bold uppercase tracking-widest animate-pulse">Syncing leads...</div>
           ) : enquiries.length === 0 ? (
-            <div className="text-center py-16 text-text-muted">Inbox is completely clear!</div>
+            <div className="text-center py-16 text-text-muted uppercase tracking-wider text-xs font-bold">Inbox is completely clear!</div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs border-collapse">
                 <thead>
-                  <tr className="bg-surface/50 border-b border-border/10 text-secondary uppercase font-bold tracking-widest">
-                    <th className="p-4">Customer</th>
-                    <th className="p-4">Contact</th>
-                    <th className="p-4">Landmark Interest</th>
-                    <th className="p-4">Type</th>
-                    <th className="p-4">Status</th>
-                    <th className="p-4 text-center">Interventions</th>
+                  <tr className="bg-primary/5 border-b border-border/10 text-primary uppercase font-extrabold tracking-widest">
+                    <th className="p-4.5 pl-6">Customer</th>
+                    <th className="p-4.5">Contact</th>
+                    <th className="p-4.5">Landmark Interest</th>
+                    <th className="p-4.5">Type</th>
+                    <th className="p-4.5">Status</th>
+                    <th className="p-4.5 text-center pr-6">Interventions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-border/5">
+                <tbody className="divide-y divide-border/10">
                   {enquiries.map((item) => (
-                    <tr key={item._id} className="hover:bg-surface/30">
-                      <td className="p-4">
-                        <div className="font-bold text-white">{item.name}</div>
-                        <div className="text-text-muted text-[10px]">{item.city || 'No City'}</div>
+                    <tr key={item._id} className="hover:bg-primary/5 transition-colors">
+                      <td className="p-4.5 pl-6">
+                        <div className="font-bold text-primary text-[13px]">{item.name}</div>
+                        <div className="text-text-muted text-[9px] font-extrabold uppercase mt-0.5 tracking-wider">{item.city || 'No City'}</div>
                       </td>
-                      <td className="p-4 space-y-1">
-                        <div className="flex items-center gap-1 text-text-muted">
-                          <Phone size={10} />
+                      <td className="p-4.5 space-y-1">
+                        <div className="flex items-center gap-1.5 text-text-muted font-medium">
+                          <Phone size={11} className="text-primary/70" />
                           <span>{item.phone}</span>
                         </div>
-                        <div className="flex items-center gap-1 text-text-muted">
-                          <Mail size={10} />
+                        <div className="flex items-center gap-1.5 text-text-muted font-medium">
+                          <Mail size={11} className="text-primary/70" />
                           <span>{item.email}</span>
                         </div>
                       </td>
-                      <td className="p-4">
-                        <span className="font-semibold text-white">{item.projectInterested}</span>
-                        {item.message && <p className="text-text-muted text-[10px] mt-1 italic max-w-xs truncate" title={item.message}>"{item.message}"</p>}
+                      <td className="p-4.5">
+                        <span className="font-extrabold text-primary uppercase tracking-wide">{item.projectInterested}</span>
+                        {item.message && <p className="text-text-muted text-[10px] mt-1.5 italic max-w-xs truncate" title={item.message}>"{item.message}"</p>}
                       </td>
-                      <td className="p-4">
-                        <span className="px-2 py-0.5 border border-white/10 rounded-full text-[9px] font-bold uppercase bg-black/40 text-text-muted">
+                      <td className="p-4.5">
+                        <span className="px-3 py-1 border border-primary/10 rounded-full text-[9px] font-extrabold uppercase bg-primary/5 text-primary">
                           {item.type}
                         </span>
                       </td>
-                      <td className="p-4">
-                        <span className={`px-2.5 py-1 text-[9px] font-bold uppercase tracking-wide border rounded-full ${
+                      <td className="p-4.5">
+                        <span className={`px-3 py-1 text-[9px] font-extrabold uppercase tracking-widest border rounded-full ${
                           item.status === 'new'
-                            ? 'bg-blue-500/10 text-blue-300 border-blue-500/20'
+                            ? 'bg-blue-500/10 text-blue-600 border-blue-500/20'
                             : item.status === 'contacted'
-                            ? 'bg-amber-500/10 text-amber-300 border-amber-500/20'
-                            : 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20'
+                            ? 'bg-amber-500/10 text-amber-600 border-amber-500/20'
+                            : 'bg-emerald-500/10 text-emerald-600 border-emerald-500/20'
                         }`}>
                           {item.status}
                         </span>
                       </td>
-                      <td className="p-4">
+                      <td className="p-4.5 pr-6">
                         <div className="flex gap-2 justify-center">
                           <button
                             onClick={() => updateEnquiryStatus(item._id, 'contacted')}
-                            className="px-2.5 py-1 text-[9px] font-semibold border border-amber-500/30 text-amber-300 hover:bg-amber-500 hover:text-white transition-all cursor-pointer rounded-sm"
+                            className="px-3 py-1.5 text-[9px] font-extrabold border border-amber-500/30 text-amber-600 hover:bg-amber-500 hover:text-white transition-all cursor-pointer rounded-full uppercase tracking-wider"
                           >
                             Call Lock
                           </button>
                           <button
                             onClick={() => updateEnquiryStatus(item._id, 'converted')}
-                            className="px-2.5 py-1 text-[9px] font-semibold border border-emerald-500/30 text-emerald-300 hover:bg-emerald-500 hover:text-white transition-all cursor-pointer rounded-sm"
+                            className="px-3 py-1.5 text-[9px] font-extrabold border border-emerald-500/30 text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all cursor-pointer rounded-full uppercase tracking-wider"
                           >
                             Deal Sign
                           </button>
@@ -361,67 +387,67 @@ export const Dashboard = () => {
 
       {/* TAB 2: PROJECTS MANAGE */}
       {activeTab === 'projects' && (
-        <div className="space-y-6">
-          <div className="flex justify-between items-center">
-            <h3 className="font-heading text-2xl text-white">Delivered Inventory Portfolio</h3>
+        <div className="space-y-6 relative z-10">
+          <div className="flex justify-between items-center select-none">
+            <h3 className="font-display text-2xl font-black text-primary uppercase tracking-tight">Delivered Inventory Portfolio</h3>
             <button
               onClick={() => setShowAddProject(!showAddProject)}
-              className="btn-gold text-[10px] px-4 py-2 cursor-pointer font-bold tracking-widest flex items-center gap-1.5"
+              className="btn-gold text-[9px] px-4 py-2 cursor-pointer font-bold tracking-widest flex items-center gap-1.5 shadow-md"
             >
-              <Plus size={14} />
+              <Plus size={13} />
               <span>Register Landmark</span>
             </button>
           </div>
 
-          {/* Quick Create Project form drawer drawer */}
+          {/* Quick Create Project form drawer */}
           {showAddProject && (
-            <form onSubmit={handleAddProjectSubmit} className="glass-panel p-6 rounded-sm bg-surface-2/70 border border-border/15 max-w-3xl space-y-4">
-              <h4 className="font-heading text-lg font-bold text-secondary">Register New Landmark Property</h4>
+            <form onSubmit={handleAddProjectSubmit} className="glass-panel p-8 rounded-[2.5rem] bg-white/70 border border-white/50 max-w-3xl space-y-4.5 shadow-lg">
+              <h4 className="font-display text-lg font-black text-primary uppercase tracking-wide">Register New Landmark Property</h4>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[9px] font-bold text-text-muted uppercase tracking-widest mb-1">Project Title</label>
+                  <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">Project Title</label>
                   <input
                     type="text" required placeholder="Voora One Sea"
                     value={newProject.name} onChange={(e) => setNewProject({...newProject, name: e.target.value})}
-                    className="w-full bg-surface/60 border border-border/20 text-white rounded-sm px-3 py-2 text-xs focus:outline-none focus:border-secondary"
+                    className="w-full bg-white/50 border border-border/80 text-primary rounded-full px-5 py-2.5 text-xs font-semibold focus:outline-none focus:border-primary"
                   />
                 </div>
                 <div>
-                  <label className="block text-[9px] font-bold text-text-muted uppercase tracking-widest mb-1">Pricing Range</label>
+                  <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">Pricing Range</label>
                   <input
                     type="text" required placeholder="1.2 Cr Onwards"
                     value={newProject.price} onChange={(e) => setNewProject({...newProject, price: e.target.value})}
-                    className="w-full bg-surface/60 border border-border/20 text-white rounded-sm px-3 py-2 text-xs focus:outline-none focus:border-secondary"
+                    className="w-full bg-white/50 border border-border/80 text-primary rounded-full px-5 py-2.5 text-xs font-semibold focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-[9px] font-bold text-text-muted uppercase tracking-widest mb-1">Specific Location</label>
+                  <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">Specific Location</label>
                   <input
                     type="text" required placeholder="Kanathur, ECR"
                     value={newProject.location} onChange={(e) => setNewProject({...newProject, location: e.target.value})}
-                    className="w-full bg-surface/60 border border-border/20 text-white rounded-sm px-3 py-2 text-xs focus:outline-none focus:border-secondary"
+                    className="w-full bg-white/50 border border-border/80 text-primary rounded-full px-5 py-2.5 text-xs font-semibold focus:outline-none focus:border-primary"
                   />
                 </div>
                 <div>
-                  <label className="block text-[9px] font-bold text-text-muted uppercase tracking-widest mb-1">Sizes (sqft)</label>
+                  <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">Sizes (sqft)</label>
                   <input
                     type="text" placeholder="1,112 – 1,584 sqft"
                     value={newProject.sizeRange} onChange={(e) => setNewProject({...newProject, sizeRange: e.target.value})}
-                    className="w-full bg-surface/60 border border-border/20 text-white rounded-sm px-3 py-2 text-xs focus:outline-none focus:border-secondary"
+                    className="w-full bg-white/50 border border-border/80 text-primary rounded-full px-5 py-2.5 text-xs font-semibold focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-[9px] font-bold text-text-muted uppercase tracking-widest mb-1">Class Type</label>
+                  <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">Class Type</label>
                   <select
                     value={newProject.type} onChange={(e) => setNewProject({...newProject, type: e.target.value})}
-                    className="w-full bg-surface/60 border border-border/20 text-white rounded-sm px-3 py-2 text-xs focus:outline-none focus:border-secondary cursor-pointer"
+                    className="w-full bg-white/50 border border-border/80 text-primary rounded-full px-5 py-2.5 text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-primary cursor-pointer appearance-none"
                   >
                     <option value="residential">Residential</option>
                     <option value="commercial">Commercial</option>
@@ -429,10 +455,10 @@ export const Dashboard = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-[9px] font-bold text-text-muted uppercase tracking-widest mb-1">Status Code</label>
+                  <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">Status Code</label>
                   <select
                     value={newProject.status} onChange={(e) => setNewProject({...newProject, status: e.target.value})}
-                    className="w-full bg-surface/60 border border-border/20 text-white rounded-sm px-3 py-2 text-xs focus:outline-none focus:border-secondary cursor-pointer"
+                    className="w-full bg-white/50 border border-border/80 text-primary rounded-full px-5 py-2.5 text-xs font-bold uppercase tracking-wider focus:outline-none focus:border-primary cursor-pointer appearance-none"
                   >
                     <option value="ongoing">Ongoing</option>
                     <option value="completed">Completed</option>
@@ -441,25 +467,25 @@ export const Dashboard = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-[9px] font-bold text-text-muted uppercase tracking-widest mb-1">BHK Configs</label>
+                  <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">BHK Configs</label>
                   <input
                     type="text" placeholder="2 BHK, 3 BHK"
                     value={newProject.bhkTypes} onChange={(e) => setNewProject({...newProject, bhkTypes: e.target.value})}
-                    className="w-full bg-surface/60 border border-border/20 text-white rounded-sm px-3 py-2 text-xs focus:outline-none focus:border-secondary"
+                    className="w-full bg-white/50 border border-border/80 text-primary rounded-full px-5 py-2.5 text-xs font-semibold focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
 
-              <div className="flex gap-4 justify-end pt-2">
+              <div className="flex gap-4 justify-end pt-3">
                 <button
                   type="button" onClick={() => setShowAddProject(false)}
-                  className="px-4 py-2 border border-border/20 text-xs uppercase text-text-muted hover:text-white rounded-sm cursor-pointer"
+                  className="px-5 py-2 border border-border/20 text-xs uppercase text-text-muted hover:text-primary rounded-full cursor-pointer font-bold tracking-widest transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="btn-gold text-[10px] px-6 py-2 cursor-pointer font-bold tracking-widest"
+                  className="btn-gold text-[9px] px-6 py-2 cursor-pointer font-bold tracking-widest shadow-md"
                 >
                   Confirm Landmark
                 </button>
@@ -469,23 +495,23 @@ export const Dashboard = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((p) => (
-              <div key={p._id} className="p-5 bg-surface-2 border border-border/10 rounded-sm flex flex-col justify-between h-44">
+              <div key={p._id} className="p-6 bg-white/70 border border-white/50 rounded-[2rem] shadow-sm hover:shadow-md transition-all duration-300 hover:translate-y-[-2px] flex flex-col justify-between h-48">
                 <div>
                   <div className="flex justify-between items-start">
-                    <h5 className="font-heading text-lg font-bold text-white truncate max-w-[80%]">{p.name}</h5>
-                    <span className="text-[8px] border border-secondary/20 rounded-full px-2 py-0.5 font-bold uppercase tracking-wider text-secondary">
+                    <h5 className="font-display text-lg font-black text-primary uppercase tracking-tight truncate max-w-[70%]">{p.name}</h5>
+                    <span className="text-[8px] border border-primary/20 rounded-full px-2.5 py-1 font-extrabold uppercase tracking-widest text-primary bg-primary/5 shrink-0">
                       {p.status}
                     </span>
                   </div>
-                  <p className="text-text-muted text-[10px] uppercase mt-1 tracking-widest">{p.location}</p>
-                  <p className="text-secondary font-semibold text-xs mt-3">{p.price}</p>
+                  <p className="text-text-muted text-[8px] uppercase mt-1 tracking-widest font-extrabold">{p.location}</p>
+                  <p className="text-secondary font-extrabold text-[13px] mt-4 uppercase tracking-wider">{p.price}</p>
                 </div>
 
-                <div className="flex justify-between items-center border-t border-border/5 pt-4">
-                  <span className="text-[9px] text-text-muted uppercase font-bold">{p.type}</span>
+                <div className="flex justify-between items-center border-t border-border/10 pt-4">
+                  <span className="text-[9px] text-text-muted uppercase font-extrabold tracking-widest bg-black/5 px-2.5 py-0.5 rounded-full">{p.type}</span>
                   <button
                     onClick={() => handleDeleteProject(p._id)}
-                    className="p-2 bg-red-500/10 border border-red-500/20 rounded-full hover:bg-red-500 hover:text-white text-red-300 transition-all cursor-pointer"
+                    className="p-2 bg-red-500/10 border border-red-500/20 rounded-full hover:bg-red-500 hover:text-white text-red-600 transition-all cursor-pointer shadow-sm"
                     title="Remove Property"
                   >
                     <Trash2 size={12} />
@@ -499,31 +525,34 @@ export const Dashboard = () => {
 
       {/* TAB 3: VISUAL STATISTICS */}
       {activeTab === 'stats' && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 relative z-10">
           {/* Bar Chart leads interest */}
-          <div className="glass-panel p-6 rounded-sm bg-surface-2 border border-border/10">
-            <h4 className="font-heading text-lg font-bold text-white mb-6 border-b border-border/10 pb-2">
+          <div className="glass-panel p-6 rounded-[2rem] bg-white/70 border border-white/50 shadow-sm">
+            <h4 className="font-display text-base font-black text-primary mb-6 border-b border-border/15 pb-3 uppercase tracking-wider">
               Leads Distribution by Property
             </h4>
-            <div className="h-64">
+            <div className="h-64 sm:h-72">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={getEnquiriesByProjectData()}>
-                  <XAxis dataKey="name" stroke="#a09880" fontSize={8} tickLine={false} />
-                  <YAxis stroke="#a09880" fontSize={10} tickLine={false} />
-                  <Tooltip contentStyle={{ background: '#16213e', border: '1px solid #c9a84c' }} />
-                  <Bar dataKey="count" fill="#c9a84c" radius={[4, 4, 0, 0]} />
+                  <XAxis dataKey="name" stroke="#5e5296" fontSize={8} tickLine={false} style={{ fontWeight: 600 }} />
+                  <YAxis stroke="#5e5296" fontSize={10} tickLine={false} style={{ fontWeight: 600 }} />
+                  <Tooltip
+                    contentStyle={{ background: 'rgba(255, 255, 255, 0.95)', border: '1px solid rgba(99, 70, 229, 0.2)', borderRadius: '16px', fontSize: '11px', boxShadow: '0 10px 25px rgba(99, 70, 229, 0.05)' }}
+                    labelStyle={{ color: '#3b22a1', fontWeight: 'bold' }}
+                  />
+                  <Bar dataKey="count" fill="#6346e5" radius={[6, 6, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
           </div>
 
           {/* Pie Chart lead status */}
-          <div className="glass-panel p-6 rounded-sm bg-surface-2 border border-border/10 flex flex-col justify-between">
+          <div className="glass-panel p-6 rounded-[2rem] bg-white/70 border border-white/50 shadow-sm flex flex-col justify-between">
             <div>
-              <h4 className="font-heading text-lg font-bold text-white mb-6 border-b border-border/10 pb-2">
+              <h4 className="font-display text-base font-black text-primary mb-6 border-b border-border/15 pb-3 uppercase tracking-wider">
                 Leads Funnel Performance
               </h4>
-              <div className="h-56">
+              <div className="h-56 sm:h-64 flex items-center justify-center">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
@@ -539,23 +568,26 @@ export const Dashboard = () => {
                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                       ))}
                     </Pie>
-                    <Tooltip contentStyle={{ background: '#16213e', border: '1px solid #c9a84c' }} />
+                    <Tooltip
+                      contentStyle={{ background: 'rgba(255, 255, 255, 0.95)', border: '1px solid rgba(99, 70, 229, 0.2)', borderRadius: '16px', fontSize: '11px', boxShadow: '0 10px 25px rgba(99, 70, 229, 0.05)' }}
+                      labelStyle={{ color: '#3b22a1', fontWeight: 'bold' }}
+                    />
                   </PieChart>
                 </ResponsiveContainer>
               </div>
             </div>
             
-            <div className="flex justify-center gap-6 text-[10px] font-bold uppercase tracking-widest border-t border-border/5 pt-4">
-              <span className="flex items-center gap-1.5 text-secondary">
-                <span className="w-2 h-2 rounded-full bg-secondary" />
+            <div className="flex justify-center gap-6 text-[9px] font-extrabold uppercase tracking-widest border-t border-border/10 pt-4 mt-2">
+              <span className="flex items-center gap-1.5 text-primary">
+                <span className="w-2.5 h-2.5 rounded-full bg-primary" />
                 <span>New</span>
               </span>
-              <span className="flex items-center gap-1.5 text-blue-400">
-                <span className="w-2 h-2 rounded-full bg-blue-500" />
+              <span className="flex items-center gap-1.5 text-secondary">
+                <span className="w-2.5 h-2.5 rounded-full bg-secondary" />
                 <span>Contacted</span>
               </span>
-              <span className="flex items-center gap-1.5 text-emerald-400">
-                <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span className="flex items-center gap-1.5 text-emerald-600">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
                 <span>Converted</span>
               </span>
             </div>
