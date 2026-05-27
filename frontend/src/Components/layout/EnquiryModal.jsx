@@ -21,12 +21,7 @@ const enquirySchema = z.object({
 
 export const EnquiryModal = () => {
   const dispatch = useDispatch();
-  const { isOpen, selectedProjectName, loading, success, error } = useSelector((state) => state.enquiry);
-
   const [isScrolled, setIsScrolled] = useState(false);
-  const [formScrollTop, setFormScrollTop] = useState(0);
-  const [formScrollHeight, setFormScrollHeight] = useState(0);
-  const [formClientHeight, setFormClientHeight] = useState(0);
 
   // Monitor scroll to sync top position dynamically with the navbar height
   useEffect(() => {
@@ -41,35 +36,17 @@ export const EnquiryModal = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleFormScroll = (e) => {
-    setFormScrollTop(e.target.scrollTop);
-    setFormScrollHeight(e.target.scrollHeight);
-    setFormClientHeight(e.target.clientHeight);
-  };
-
-  // Prevent body scroll and initialize modal scroll metrics
+  // Prevent background page scrolling while the modal is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
-      const timer = setTimeout(() => {
-        const el = document.getElementById('modal-scroll-fields');
-        if (el) {
-          setFormScrollHeight(el.scrollHeight);
-          setFormClientHeight(el.clientHeight);
-          setFormScrollTop(el.scrollTop);
-        }
-      }, 150);
-      return () => {
-        clearTimeout(timer);
-        document.body.style.overflow = '';
-      };
     } else {
       document.body.style.overflow = '';
     }
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isOpen]);
-
-  const canScrollUp = formScrollTop > 4;
-  const canScrollDown = formScrollHeight - formScrollTop - formClientHeight > 4;
 
   // Form setup
   const {
@@ -173,133 +150,118 @@ export const EnquiryModal = () => {
                 {/* Form */}
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                   
-                  {/* Form fields with custom fade-scroll effects */}
-                  <div className="relative">
-                    {/* Top Scroll Fade Mask */}
-                    <div className={`absolute top-0 left-0 right-0 h-6 bg-gradient-to-b from-white via-white/80 to-transparent pointer-events-none z-25 transition-opacity duration-300 ${canScrollUp ? 'opacity-100' : 'opacity-0'}`} />
-                    
-                    {/* Bottom Scroll Fade Mask */}
-                    <div className={`absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-25 transition-opacity duration-300 ${canScrollDown ? 'opacity-100' : 'opacity-0'}`} />
+                  {/* Name */}
+                  <div>
+                    <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">
+                      Full Name <span className="text-secondary">*</span>
+                    </label>
+                    <div className="relative flex items-center">
+                      <User className="absolute left-4 text-primary/40" size={14} />
+                      <input
+                        type="text"
+                        placeholder="Shri Pavan Kumar"
+                        {...register('name')}
+                        className="w-full bg-white/50 border border-border/80 text-primary rounded-full pl-11 pr-5 py-2.5 focus:border-primary focus:bg-white/80 focus:outline-none transition-all text-xs font-semibold"
+                      />
+                    </div>
+                    {errors.name && <p className="text-red-500 text-[10px] mt-1 pl-4 font-bold">{errors.name.message}</p>}
+                  </div>
 
-                    <div 
-                      id="modal-scroll-fields"
-                      onScroll={handleFormScroll}
-                      className="max-h-[260px] md:max-h-[300px] overflow-y-auto pr-1.5 space-y-4 scrollbar-thin pb-2 pt-1"
-                    >
-                      {/* Name */}
-                      <div>
-                        <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">
-                          Full Name <span className="text-secondary">*</span>
-                        </label>
-                        <div className="relative flex items-center">
-                          <User className="absolute left-4 text-primary/40" size={14} />
-                          <input
-                            type="text"
-                            placeholder="Shri Pavan Kumar"
-                            {...register('name')}
-                            className="w-full bg-white/50 border border-border/80 text-primary rounded-full pl-11 pr-5 py-2.5 focus:border-primary focus:bg-white/80 focus:outline-none transition-all text-xs font-semibold"
-                          />
-                        </div>
-                        {errors.name && <p className="text-red-500 text-[10px] mt-1 pl-4 font-bold">{errors.name.message}</p>}
-                      </div>
-
-                      {/* Contact info grid */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {/* Email */}
-                        <div>
-                          <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">
-                            Email Address <span className="text-secondary">*</span>
-                          </label>
-                          <div className="relative flex items-center">
-                            <Mail className="absolute left-4 text-primary/40" size={14} />
-                            <input
-                              type="email"
-                              placeholder="pavan@voora.co.in"
-                              {...register('email')}
-                              className="w-full bg-white/50 border border-border/80 text-primary rounded-full pl-11 pr-5 py-2.5 focus:border-primary focus:bg-white/80 focus:outline-none transition-all text-xs font-semibold"
-                            />
-                          </div>
-                          {errors.email && <p className="text-red-500 text-[10px] mt-1 pl-4 font-bold">{errors.email.message}</p>}
-                        </div>
-
-                        {/* Phone */}
-                        <div>
-                          <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">
-                            Phone Number <span className="text-secondary">*</span>
-                          </label>
-                          <div className="relative flex items-center">
-                            <Phone className="absolute left-4 text-primary/40" size={14} />
-                            <input
-                              type="tel"
-                              placeholder="+91 98400 12345"
-                              {...register('phone')}
-                              className="w-full bg-white/50 border border-border/80 text-primary rounded-full pl-11 pr-5 py-2.5 focus:border-primary focus:bg-white/80 focus:outline-none transition-all text-xs font-semibold"
-                            />
-                          </div>
-                          {errors.phone && <p className="text-red-500 text-[10px] mt-1 pl-4 font-bold">{errors.phone.message}</p>}
-                        </div>
-                      </div>
-
-                      {/* City and Project Interested Grid */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        {/* City */}
-                        <div>
-                          <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">
-                            City of Residence
-                          </label>
-                          <div className="relative flex items-center">
-                            <MapPin className="absolute left-4 text-primary/40" size={14} />
-                            <input
-                              type="text"
-                              placeholder="Chennai"
-                              {...register('city')}
-                              className="w-full bg-white/50 border border-border/80 text-primary rounded-full pl-11 pr-5 py-2.5 focus:border-primary focus:bg-white/80 focus:outline-none transition-all text-xs font-semibold"
-                            />
-                          </div>
-                        </div>
-
-                        {/* Project Interested In */}
-                        <div>
-                          <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">
-                            Project of Interest <span className="text-secondary">*</span>
-                          </label>
-                          <div className="relative flex items-center">
-                            <Building2 className="absolute left-4 text-primary/40" size={14} />
-                            <select
-                              {...register('projectInterested')}
-                              className="w-full bg-white/50 border border-border/80 text-primary rounded-full pl-11 pr-5 py-2.5 focus:border-primary focus:bg-white/80 focus:outline-none transition-all text-xs font-bold uppercase tracking-wider cursor-pointer appearance-none"
-                            >
-                              <option value="" disabled>Select Project</option>
-                              <option value="Voora One Sea">Voora One Sea (ECR)</option>
-                              <option value="Voora Westside">Voora Westside (Ramapuram)</option>
-                              <option value="Voora Beckford">Voora Beckford (Nungambakkam)</option>
-                              <option value="Voora Highway Haven">Voora Highway Haven (NH-48)</option>
-                              <option value="Voora Agastya">Voora Agastya (Tondiarpet)</option>
-                              <option value="Voora Tech Edge">Voora Tech Edge (Guindy)</option>
-                              <option value="General Inquiry">General Voora Inquiry</option>
-                            </select>
-                          </div>
-                          {errors.projectInterested && <p className="text-red-500 text-[10px] mt-1 pl-4 font-bold">{errors.projectInterested.message}</p>}
-                        </div>
-                      </div>
-
-                      {/* Message */}
-                      <div>
-                        <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">
-                          Message / Comments
-                        </label>
-                        <textarea
-                          rows="3"
-                          placeholder="Describe your property requirements or consultation inquiries in brief..."
-                          {...register('message')}
-                          className="w-full bg-white/50 border border-border/80 text-primary rounded-[1.5rem] px-5 py-4 focus:border-primary focus:bg-white/80 focus:outline-none transition-all text-xs font-medium resize-none"
+                  {/* Contact info grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* Email */}
+                    <div>
+                      <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">
+                        Email Address <span className="text-secondary">*</span>
+                      </label>
+                      <div className="relative flex items-center">
+                        <Mail className="absolute left-4 text-primary/40" size={14} />
+                        <input
+                          type="email"
+                          placeholder="pavan@voora.co.in"
+                          {...register('email')}
+                          className="w-full bg-white/50 border border-border/80 text-primary rounded-full pl-11 pr-5 py-2.5 focus:border-primary focus:bg-white/80 focus:outline-none transition-all text-xs font-semibold"
                         />
                       </div>
+                      {errors.email && <p className="text-red-500 text-[10px] mt-1 pl-4 font-bold">{errors.email.message}</p>}
+                    </div>
+
+                    {/* Phone */}
+                    <div>
+                      <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">
+                        Phone Number <span className="text-secondary">*</span>
+                      </label>
+                      <div className="relative flex items-center">
+                        <Phone className="absolute left-4 text-primary/40" size={14} />
+                        <input
+                          type="tel"
+                          placeholder="+91 98400 12345"
+                          {...register('phone')}
+                          className="w-full bg-white/50 border border-border/80 text-primary rounded-full pl-11 pr-5 py-2.5 focus:border-primary focus:bg-white/80 focus:outline-none transition-all text-xs font-semibold"
+                        />
+                      </div>
+                      {errors.phone && <p className="text-red-500 text-[10px] mt-1 pl-4 font-bold">{errors.phone.message}</p>}
                     </div>
                   </div>
 
+                  {/* City and Project Interested Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* City */}
+                    <div>
+                      <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">
+                        City of Residence
+                      </label>
+                      <div className="relative flex items-center">
+                        <MapPin className="absolute left-4 text-primary/40" size={14} />
+                        <input
+                          type="text"
+                          placeholder="Chennai"
+                          {...register('city')}
+                          className="w-full bg-white/50 border border-border/80 text-primary rounded-full pl-11 pr-5 py-2.5 focus:border-primary focus:bg-white/80 focus:outline-none transition-all text-xs font-semibold"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Project Interested In */}
+                    <div>
+                      <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">
+                        Project of Interest <span className="text-secondary">*</span>
+                      </label>
+                      <div className="relative flex items-center">
+                        <Building2 className="absolute left-4 text-primary/40" size={14} />
+                        <select
+                          {...register('projectInterested')}
+                          className="w-full bg-white/50 border border-border/80 text-primary rounded-full pl-11 pr-5 py-2.5 focus:border-primary focus:bg-white/80 focus:outline-none transition-all text-xs font-bold uppercase tracking-wider cursor-pointer appearance-none"
+                        >
+                          <option value="" disabled>Select Project</option>
+                          <option value="Voora One Sea">Voora One Sea (ECR)</option>
+                          <option value="Voora Westside">Voora Westside (Ramapuram)</option>
+                          <option value="Voora Beckford">Voora Beckford (Nungambakkam)</option>
+                          <option value="Voora Highway Haven">Voora Highway Haven (NH-48)</option>
+                          <option value="Voora Agastya">Voora Agastya (Tondiarpet)</option>
+                          <option value="Voora Tech Edge">Voora Tech Edge (Guindy)</option>
+                          <option value="General Inquiry">General Voora Inquiry</option>
+                        </select>
+                      </div>
+                      {errors.projectInterested && <p className="text-red-500 text-[10px] mt-1 pl-4 font-bold">{errors.projectInterested.message}</p>}
+                    </div>
+                  </div>
+
+                  {/* Message */}
+                  <div>
+                    <label className="block text-[9px] font-extrabold text-text-muted uppercase tracking-widest mb-1.5 ml-2">
+                      Message / Comments
+                    </label>
+                    <textarea
+                      rows="3"
+                      placeholder="Describe your property requirements or consultation inquiries in brief..."
+                      {...register('message')}
+                      className="w-full bg-white/50 border border-border/80 text-primary rounded-[1.5rem] px-5 py-4 focus:border-primary focus:bg-white/80 focus:outline-none transition-all text-xs font-medium resize-none"
+                    />
+                  </div>
+
                   {/* Submit and safety info */}
-                  <div className="pt-2 border-t border-border/10">
+                  <div className="pt-2">
                     <button
                       type="submit"
                       disabled={loading}
